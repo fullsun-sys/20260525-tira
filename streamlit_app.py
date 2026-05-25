@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import font_manager as fm
 
-# 한글 폰트 설정
-plt.rcParams['font.family'] = 'DejaVu Sans'
+# 한글 폰트 설정 - 마이너스 기호 깨짐 방지
+plt.rcParams['axes.unicode_minus'] = False
 
 # 페이지 설정
 st.set_page_config(page_title="이차함수 그래프", layout="wide")
@@ -72,10 +72,10 @@ with tab2:
     ax.plot(x, y, 'b-', linewidth=2.5, label=f'y = {a:.1f}x² + {b:.1f}x + {c:.1f}')
     
     # 꼭짓점 표시
-    ax.plot(vertex_x, vertex_y, 'ro', markersize=10, label=f'꼭짓점 ({vertex_x:.2f}, {vertex_y:.2f})', zorder=5)
+    ax.plot(vertex_x, vertex_y, 'ro', markersize=10, label=f'Vertex ({vertex_x:.2f}, {vertex_y:.2f})', zorder=5)
     
     # y절편 표시
-    ax.plot(0, c, 'go', markersize=8, label=f'y절편 (0, {c:.1f})', zorder=5)
+    ax.plot(0, c, 'go', markersize=8, label=f'y-intercept (0, {c:.1f})', zorder=5)
     
     # x절편 표시 (실근이 있는 경우)
     if discriminant >= 0:
@@ -84,9 +84,9 @@ with tab2:
         ax.plot(x1, 0, 'mo', markersize=8, zorder=5)
         ax.plot(x2, 0, 'mo', markersize=8, zorder=5)
         if abs(x1 - x2) > 0.01:
-            ax.legend([f'x절편: ({x1:.2f}, 0), ({x2:.2f}, 0)'], loc='upper right', fontsize=9)
+            ax.legend([f'x-intercepts: ({x1:.2f}, 0), ({x2:.2f}, 0)'], loc='upper right', fontsize=9)
         else:
-            ax.legend([f'중근: ({x1:.2f}, 0)'], loc='upper right', fontsize=9)
+            ax.legend([f'Double root: ({x1:.2f}, 0)'], loc='upper right', fontsize=9)
     
     # 격자 및 축
     ax.grid(True, alpha=0.3, linestyle='--')
@@ -96,7 +96,7 @@ with tab2:
     ax.set_ylim(-15, 20)
     ax.set_xlabel('x', fontsize=12)
     ax.set_ylabel('y', fontsize=12)
-    ax.set_title(f'이차함수: y = {a:.1f}x² + {b:.1f}x + {c:.1f}', fontsize=14, fontweight='bold')
+    ax.set_title(f'Quadratic Function: y = {a:.1f}x² + {b:.1f}x + {c:.1f}', fontsize=14, fontweight='bold')
     ax.legend(fontsize=10)
     
     st.pyplot(fig)
@@ -181,7 +181,7 @@ with tab3:
         ax_quiz.set_ylim(-15, 20)
         ax_quiz.set_xlabel('x', fontsize=12)
         ax_quiz.set_ylabel('y', fontsize=12)
-        ax_quiz.set_title('다음 그래프의 정보를 구하세요', fontsize=14, fontweight='bold')
+        ax_quiz.set_title('Find the information of this graph', fontsize=14, fontweight='bold')
         
         st.pyplot(fig_quiz)
         
